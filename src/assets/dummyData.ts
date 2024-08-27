@@ -1,3 +1,4 @@
+import { returnType } from "../utils/getWeather";
 import { keys } from "./icons";
 
 export const dayCards = [
@@ -38,22 +39,24 @@ export const dayCards = [
   },
 ];
 
-export const dummyHeader = [
-  {
-    label: "High",
-    value: 32,
-    unit: "&deg;",
-  },
-  { label: "FL High", value: 27, unit: "&deg;" },
-  { label: "Wind", value: 9, unit: "mph" },
-  { label: "Low", value: 19, unit: "&deg;" },
-  {
-    label: "FL Low",
-    value: 12,
-    unit: "&deg;",
-  },
-  { label: "Precip", value: 0.1, unit: "in" },
-]
+export const dummyCurrentData: {
+  label: string,
+  valueKey: keyof returnType["current"],
+  unit: string,
+}[] = [{
+  label: "High",
+  valueKey: "highTemp",
+  unit: "&deg;",
+},
+{ label: "FL High", valueKey: "highFeelsLike", unit: "&deg;" },
+{ label: "Wind", valueKey: "windSpeed", unit: "mph" },
+{ label: "Low", valueKey: "lowTemp", unit: "&deg;" },
+{
+  label: "FL Low",
+  valueKey: "lowFeelsLike",
+  unit: "&deg;",
+},
+{ label: "Precip", valueKey: "precip", unit: "in" },]
 
 export const dummyHourData = [
   { time: '12pm', day: 'Monday', temp: 25, icon: keys[Math.floor(Math.random() * keys.length)], FLTemp: 40, wind: 10, precip: 0 },

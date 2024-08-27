@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { icons } from "../assets/icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { ref, computed } from "vue";
 import { dayCards as dummyData } from "../assets/dummyData";
+import DayCard from "./day-card.vue";
+import { dayFormater } from "../utils/getWeather";
+import { getIconName } from "../assets/icons";
+import { weatherData } from "../assets/weatherStore";
+
+const dailyCards = computed(() =>
+  weatherData.value?.daily?.map((day) => {
+    return {
+      icon: getIconName(day.iconCode),
+      day: dayFormater.format(day.timestamp),
+      temp: day.maxTemp,
+    };
+  })
+);
 
 const dayCards = ref(dummyData);
 </script>
 
 <template>
   <section class="day-section">
-    <div v-for="day in dayCards" class="day-card">
-      <FontAwesomeIcon
-        :icon="icons[day.icon]"
-        class="weather-icon"
-      ></FontAwesomeIcon>
-      <div class="day-card-day">{{ day.day }}</div>
-      <div>{{ day.temp }}</div>
-    </div>
+    <DayCard :dayCards="dayCards" v-if="!dailyCards"></DayCard>
+    <DayCard :dayCards="dailyCards" v-else></DayCard>
   </section>
 </template>
