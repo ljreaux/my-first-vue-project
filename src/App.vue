@@ -35,7 +35,7 @@ onMounted(async () => {
 
 <template>
   <div :class="{ blurred: loading }">
-    <Header :current="weatherData?.current || null" />
+    <Header />
     <DaySection />
     <HourSection />
   </div>
