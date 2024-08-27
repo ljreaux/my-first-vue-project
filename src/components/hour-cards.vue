@@ -7,10 +7,10 @@ const { hours } = defineProps<{
     day: string;
     time: string;
     icon: string;
-    temp: string;
-    FLTemp: string;
-    wind: string;
-    precip: string;
+    temp: number;
+    FLTemp: number;
+    wind: number;
+    precip: number;
   }[];
 }>();
 </script>
